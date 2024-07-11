@@ -1,0 +1,154 @@
+@import url("https://fonts.cdnfonts.com/css/ica-rubrik-black");
+@import url("https://fonts.cdnfonts.com/css/poppins");
+.banner {
+  width: 100%; /* Définit la largeur à 100% de l'élément parent */
+  height: 100vh; /* Définit la hauteur à 100% de la hauteur de la fenêtre */
+  text-align: center; /* Centre le texte horizontalement */
+  overflow: hidden; /* Cache les parties débordant de l'élément */
+  position: relative; /* Positionne l'élément relativement à son élément parent */
+}
+
+.banner .slider {
+  position: absolute; /* Positionne l'élément de manière absolue par rapport à .banner */
+  width: 200px; /* Définit une largeur fixe de 200 pixels */
+  height: 250px; /* Définit une hauteur fixe de 250 pixels */
+  top: 10%; /* Positionne l'élément à 10% du haut de l'élément parent */
+  left: calc(50% - 100px); /* Centre horizontalement l'élément */
+  transform-style: preserve-3d; /* Active la préservation de la transformation en 3D */
+  transform: perspective(1000px); /* Applique une perspective de 1000 pixels */
+  animation: autoRun 20s linear infinite; /* Applique une animation infinie de 20 secondes */
+  z-index: 2; /* Définit l'ordre de superposition à 2 */
+}
+
+@keyframes autoRun {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg); /* Début de l'animation */
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg); /* Fin de l'animation */
+  }
+}
+
+.banner .slider .item {
+  position: absolute; /* Positionne l'élément de manière absolue */
+  inset: 0 0 0 0; /* Étend l'élément sur toute la zone de l'élément parent */
+  transform: rotateY(
+      calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+    )
+    /* Rotation Y basée sur la position */ translateZ(550px); /* Translation Z de 550 pixels */
+}
+
+.banner .slider .item img {
+  width: 100%; /* Définit la largeur de l'image à 100% du conteneur */
+  height: 100%; /* Définit la hauteur de l'image à 100% du conteneur */
+  object-fit: cover; /* L'image couvre tout le conteneur, recadrant si nécessaire */
+}
+
+.banner .content {
+  position: absolute; /* Positionne l'élément de manière absolue */
+  bottom: 0; /* Aligne l'élément en bas du conteneur */
+  left: 50%; /* Centre l'élément horizontalement */
+  transform: translateX(
+    -50%
+  ); /* Ajuste la position pour être exactement au centre */
+  width: min(
+    1400px,
+    100vw
+  ); /* Définit la largeur à 1400 pixels ou 100% de la fenêtre, selon la plus petite valeur */
+  height: max-content; /* Ajuste la hauteur au contenu */
+  padding-bottom: 100px; /* Ajoute un padding en bas de 100 pixels */
+  display: flex; /* Utilise Flexbox pour disposer les éléments */
+  flex-wrap: wrap; /* Permet de retourner à la ligne si nécessaire */
+  justify-content: space-between; /* Distribue l'espace entre les éléments */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  z-index: 1; /* Définit l'ordre de superposition à 1 */
+}
+
+.banner .content h1 {
+  font-family: "ICA Rubrik"; /* Définit la police de caractère */
+  font-size: 16em; /* Définit la taille de la police */
+  line-height: 1em; /* Définit la hauteur de ligne */
+  color: #9b1515; /* Définit la couleur du texte */
+  position: relative; /* Positionne l'élément relativement à son conteneur */
+}
+
+.banner .content h1::after {
+  position: absolute; /* Positionne pseudo-élément de manière absolue */
+  inset: 0 0 0 0; /* Étend sur toute la zone de l'élément parent */
+  content: attr(
+    data-content
+  ); /* Utilise l'attribut data-content comme contenu */
+  z-index: 2; /* Définit l'ordre de superposition à 2 */
+  -webkit-text-stroke: 2px #d2d2d2; /* Applique un contour au texte */
+  color: transparent; /* Rend le texte transparent */
+}
+
+.banner .content .author {
+  font-family: Poppins; /* Définit la police de caractère */
+  text-align: right; /* Aligne le texte à droite */
+  max-width: 200px; /* Définit une largeur maximale de 200 pixels */
+}
+
+.banner .content h2 {
+  font-size: 3em; /* Définit la taille de la police */
+}
+
+.banner .content .model {
+  background-image: url(images/model.png); /* Définit une image de fond */
+  width: 100%; /* Définit la largeur à 100% */
+  height: 75vh; /* Définit la hauteur à 75% de la hauteur de la fenêtre */
+  position: absolute; /* Positionne l'élément de manière absolue */
+  bottom: 0; /* Aligne l'élément en bas du conteneur */
+  left: 0; /* Aligne l'élément à gauche du conteneur */
+  background-size: auto 130%; /* Redimensionne l'image */
+  background-repeat: no-repeat; /* Empêche la répétition de l'image */
+  background-position: top center; /* Centre l'image en haut */
+  z-index: 1; /* Définit l'ordre de superposition à 1 */
+}
+
+@media screen and (max-width: 1023px) {
+  .banner .slider {
+    width: 160px; /* Ajuste la largeur pour les petits écrans */
+    height: 200px; /* Ajuste la hauteur pour les petits écrans */
+    left: calc(50% - 80px); /* Centre horizontalement l'élément */
+  }
+  .banner .slider .item {
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      /* Ajuste la rotation Y */ translateZ(300px); /* Ajuste la translation Z */
+  }
+  .banner .content h1 {
+    text-align: center; /* Centre le texte */
+    width: 100%; /* Définit la largeur à 100% */
+    text-shadow: 0 10px 20px #000; /* Ajoute une ombre au texte */
+    font-size: 7em; /* Ajuste la taille de la police */
+  }
+  .banner .content .author {
+    color: #fff; /* Définit la couleur du texte */
+    padding: 20px; /* Ajoute du padding */
+    text-shadow: 0 10px 20px #000; /* Ajoute une ombre au texte */
+    z-index: 2; /* Définit l'ordre de superposition à 2 */
+    max-width: unset; /* Supprime la largeur maximale */
+    width: 100%; /* Définit la largeur à 100% */
+    text-align: center; /* Centre le texte */
+    padding: 0 30px; /* Ajuste le padding */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner .slider {
+    width: 100px; /* Ajuste la largeur pour les très petits écrans */
+    height: 150px; /* Ajuste la hauteur pour les très petits écrans */
+    left: calc(50% - 50px); /* Centre horizontalement l'élément */
+  }
+  .banner .slider .item {
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      /* Ajuste la rotation Y */ translateZ(180px); /* Ajuste la translation Z */
+  }
+  .banner .content h1 {
+    font-size: 5em; /* Ajuste la taille de la police */
+  }
+}
